@@ -119,11 +119,12 @@ function mergeVisionIntoIntent(intent, v, rawText) {
   const families = [];
   if (v.color) families.push(v.color);
   if (parsed.color && !families.includes(parsed.color)) families.push(parsed.color);
-  // 用户文字里点名的品类/风格优先于模型（可纠正识别）
-  const category = parsed.category || v.category;
-  const style = parsed.style || v.style;
+  // 用户文字里点名的具体名词强制覆盖视觉识别的 subject —— 草图解析常不准，用户明确写出的名词更可信
+  const specificNouns = ['猞猁','犀牛','袋熊','浣熊','恐龙','鸟','花束','珊瑚','教堂','房屋','狗屋','太空站','摩托','机车','机甲','机器人','雕像','雕塑','运动鞋','球鞋','发动机','引擎'];
+  const textNoun = (parsed.keywords || []).find(k => specificNouns.includes(k));
+  const subject = textNoun || v.subject;
   const keywords = [...new Set([...(v.keywords || []), ...parsed.keywords])];
-  if (v.subject && !keywords.includes(v.subject)) keywords.push(v.subject);
+  if (subject && !keywords.includes(subject)) keywords.push(subject);
 
   intent.category = category;
   intent.style = style;
@@ -131,7 +132,8 @@ function mergeVisionIntoIntent(intent, v, rawText) {
   intent.textKeywords = keywords;
   intent.confidence = 96;
   intent.source = '多模态视觉模型';
-  intent.visionData = v;
+  intent.visionData = v ? { ...v, subject } : v;
+  intent.subjectOverride = !!textNoun;
   intent.summary = v.summary
     ? `${v.summary}（视觉模型识别：${[v.category, v.style, v.color].filter(Boolean).join(' / ')}）`
     : describeIntent({ category, style, families, file: true });
