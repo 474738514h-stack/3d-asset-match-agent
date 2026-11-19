@@ -23,16 +23,12 @@
   .brand small{display:block;font-size:11px;font-weight:400;color:var(--muted)}
   .head-tag{font-size:12px;color:var(--primary);background:var(--primary-soft);padding:6px 13px;border-radius:20px;font-weight:600}
 
-  .hero{padding:52px 0 40px;text-align:center}
+  .hero{padding:52px 0 36px;text-align:center}
   .eyebrow{font-size:12px;color:var(--primary);font-weight:700;letter-spacing:2px;margin-bottom:14px}
-  .hero h1{font-size:36px;line-height:1.3;margin:0 0 14px;letter-spacing:-.5px}
+  .hero h1{font-size:36px;line-height:1.3;margin:0 0 18px;letter-spacing:-.5px}
   .hero h1 em{font-style:normal;color:var(--primary)}
-  .lede{font-size:16px;color:var(--muted);max-width:660px;margin:0 auto 20px}
-  .role{display:inline-block;font-size:12.5px;color:var(--green);background:var(--green-soft);padding:6px 15px;border-radius:20px;font-weight:600}
-  .metrics{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:26px}
-  .metric{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:13px 24px;min-width:118px}
-  .metric b{display:block;font-size:24px;color:var(--primary);font-variant-numeric:tabular-nums}
-  .metric span{font-size:12px;color:var(--muted)}
+  .lede{font-size:15px;color:var(--muted);max-width:680px;margin:0 auto 7px;line-height:1.8}
+  .role{display:inline-block;font-size:12.5px;color:var(--green);background:var(--green-soft);padding:6px 15px;border-radius:20px;font-weight:600;margin-top:16px}
 
   /* 演示入口 */
   .demo{max-width:960px;margin:0 auto;padding:0 26px}
@@ -72,6 +68,13 @@
   .rows .k{color:var(--muted);font-weight:600}
   .rows .v{color:#3b4052}
   .rows .v b{color:var(--ink)}
+  details.more-iter{margin-top:14px;border:1px dashed var(--line);border-radius:12px;padding:0 18px;background:transparent}
+  details.more-iter summary{cursor:pointer;padding:14px 0;font-size:13px;color:var(--muted);font-weight:600;list-style:none}
+  details.more-iter summary::-webkit-details-marker{display:none}
+  details.more-iter summary::before{content:"＋ ";color:var(--primary);font-weight:700}
+  details.more-iter[open] summary::before{content:"－ "}
+  details.more-iter .mini{padding:0 0 14px;font-size:12.5px;color:var(--muted);line-height:1.9}
+  details.more-iter .mini b{color:var(--ink)}
 
   .flow{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch}
   .step{flex:1;min-width:120px;background:var(--white);border:1px solid var(--line);border-radius:11px;padding:15px;text-align:center}
@@ -124,7 +127,6 @@
   @media(max-width:680px){
     .hero h1{font-size:27px}.goal,.two{grid-template-columns:1fr}
     .rows{grid-template-columns:1fr;gap:2px}.rows .v{margin-bottom:8px}
-    .metric{min-width:100px;padding:11px 16px}
     .three-q,.biz-grid,.twoface{grid-template-columns:1fr}
   }
 </style>
@@ -140,15 +142,10 @@
 <div class="hero wrap">
   <div class="eyebrow">PRODUCT CASE STUDY</div>
   <h1>不是帮人<em>找到</em>，<br>是帮人在不确定中<em>做决策</em></h1>
-  <p class="lede">这个工具最值钱的地方，不是"帮人找东西"，而是帮人在不确定中快速做决策。风格对不对、能不能用、值不值这个价——这三个问题在采购流程里反复出现，而它能一次性给出答案。</p>
-  <p class="lede" style="font-size:14px;margin-top:-8px">买家只上传一张参考图、草图，或一句模糊想法，系统就从兼容性、画质、价格三个维度给出可解释的评估与"买哪个"的结论。从问题定义到落地验证，全程由我推动。</p>
+  <p class="lede">买家手里往往只有一张参考图、一张草图，或一句模糊的想法。</p>
+  <p class="lede">但要回答的问题很具体：风格对不对？能不能用？值不值这个价？</p>
+  <p class="lede">Match3D Agent 把这三个问题，一次变成有依据的结论。</p>
   <span class="role">AI 产品经理 · 独立定义并推动落地</span>
-  <div class="metrics">
-    <div class="metric"><b>26</b><span>真实平台资产</span></div>
-    <div class="metric"><b>−79%</b><span>草图体积优化</span></div>
-    <div class="metric"><b>7</b><span>关键问题解决</span></div>
-    <div class="metric"><b>12</b><span>节点工作流跑通</span></div>
-  </div>
 </div>
 
 <div class="demo">
@@ -170,83 +167,56 @@
       <div class="card"><h3>我的产品思路</h3><p>多模态理解需求 → 相关性过滤 → 可解释评分 → 渐进披露 → 并排对比给结论。全程把结论摆在最前，把证据放在用户需要时展开；并让架构可规模化——资产走知识库，不写死在代码里。<br><br>核心标准只有一个：<b>每一句话，是不是帮用户更快做了决定</b>，而不是"功能是不是更炫"。</p></div>
     </div>
     <div class="decide">
-      <div class="big">买家真正卡住的不是"找不到"，而是"找到了不敢拍板"。</div>
+      <div class="big">买家真正的难点不是"找不到"，而是"找到了也难以下决定"。</div>
       <p>所以这不是一个检索工具，是一个决策辅助工具。搜索给的是一列结果，决策给的是"该选哪个、为什么"——后者才是采购场景里真正稀缺的东西。</p>
     </div>
     <div class="bridge" style="background:var(--primary-soft);border-color:#d9d2ff;color:#4b4570">
-      <b style="color:var(--primary)">我的角色 · AI 产品经理：</b>这个项目从问题定义、方案取舍到落地验证由我一人推动。我不写代码，但我做三件事——<b>定义对的问题、做对的取舍、推动真正落地</b>。我清楚技术能做什么、不能做什么、代价是什么，所以我定的方案工程师能直接接、不返工，我给的预期也靠谱。下面每一条都是一次产品判断，而非一次技术炫技。
+      <b style="color:var(--primary)">我的角色 · AI 产品经理：</b>从问题定义、方案取舍到落地验证由我一人主导——定义对的问题、做对的取舍、推动真正落地。我把技术边界与成本算进产品决策，因此方案能被工程直接接手、预期可控。下面每一条都是一次产品判断。
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><div class="no">02 · 迭代优化记录</div><h2>七个关键判断，决定了产品能不能用</h2>
-      <p>从"一个想法"到"一个能拍板的决策工具"，经历 7 轮优化。每轮我先判断问题值不值得解决、该解决到什么程度，再定方案、推动落地。技术不难，难在判断。</p></div>
+    <div class="sec-head"><div class="no">02 · 迭代优化记录</div><h2>三个关键判断，决定了产品能不能用</h2>
+      <p>从想法到可运行系统，有三个判断直接决定了产品能否落地、能否规模化。每轮都先判断问题是否值得解决、该解决到什么程度，再定方案并推动实现。</p></div>
     <div class="issues">
 
       <div class="issue">
-        <div class="top"><span class="idx">1</span><h3>演示资产是编的，没有说服力</h3><span class="tag arch">架构决策</span></div>
+        <div class="top"><span class="idx">1</span><h3>草图解析不准，用描述里的名词纠正</h3><span class="tag product">产品设计</span></div>
         <div class="rows">
-          <div class="k">问题</div><div class="v">原型最初用 12 个模拟资产，数据自说自话，无法证明能接真实平台。</div>
-          <div class="k">怎么做</div><div class="v">公司站点是 Nuxt 服务端渲染关闭的 SPA，普通抓取拿不到资产。用无头浏览器渲染出 DOM 再解析，拿到 26 个真实资产的名称/价格/图片；再用关键词逐个搜索内部接口，按图片尾号精确匹配到资产 ID，26/26 全部命中，回填真实分类、体积、格式、热度。</div>
-          <div class="k">结果</div><div class="v"><b>资产从"编的"变成"真的"</b>。对站点未公开的面数、贴图、PBR，明确标注为估算，不冒充真实数据。</div>
+          <div class="k">问题</div><div class="v">草图交给视觉模型解析，关键词经常不理想——草图潦草、主体容易被认错（把犀牛认成别的很常见）。但用户在描述框里手写的名词，是明确意图，比模型猜测更可信。</div>
+          <div class="k">怎么做</div><div class="v">我定了一条规则：<b>当文字与图片冲突时，文字里的具体名词强制覆盖图片解析的名词</b>。从描述中提取具体名词（犀牛、机甲、运动鞋…）覆盖模型给出的主体词，再叠加<b>两级锚点过滤</b>——具体名词做强锚点精确匹配、泛类（动物/角色）做弱锚点兜底、停用词表滤掉"模型/物品"这类无意义主体。</div>
+          <div class="k">结果</div><div class="v">搜犀牛仅返回犀牛，不再混入发动机、狗屋；识别成库里没有的品类（如牦牛）时，也能靠文字纠正回来，或友好返回空结果。<b>一次错误推荐就会损害信任，相关性是底线。</b></div>
         </div>
       </div>
 
       <div class="issue">
-        <div class="top"><span class="idx">2</span><h3>搜索犀牛，却混进发动机、狗屋、鸟</h3><span class="tag product">产品设计</span></div>
+        <div class="top"><span class="idx">2</span><h3>降本：不牺牲效果，控制 token 成本</h3><span class="tag eng">工程优化</span></div>
         <div class="rows">
-          <div class="k">问题</div><div class="v">评估函数对全量资产打分后全部返回，低分资产也留在结果里，直接破坏用户信任。</div>
-          <div class="k">怎么做</div><div class="v">设计两级锚点过滤：<b>具体名词</b>（犀牛、机甲、球鞋）为强锚点，只在名称和标签里精确匹配；<b>泛类</b>（动物、角色）为弱锚点兜底；再加停用词表过滤模型给出的"模型/物品"等无意义主体。</div>
-          <div class="k">结果</div><div class="v">搜犀牛只返回犀牛一条（兼容 93 分），"搜什么出什么"，结果可信度大幅提升。</div>
+          <div class="k">问题</div><div class="v">多模态识别每次调用都要付费，草图白边多、分辨率高，直接送模型很费 token。但"识别品类/风格/颜色/主体几个词"是轻量结构化提取任务，根本用不上旗舰大模型。</div>
+          <div class="k">怎么做</div><div class="v"><b>图片侧</b>：裁白边 → 长边缩到 512–1024 → JPEG 压缩，体积 20KB→4KB，视觉 token 随之大幅下降、识别反更稳。<br><b>模型侧建议</b>：用轻量视觉模型就够——首选<b>通义千问 Qwen3.7-Flash</b>（支持图像理解与 JSON 结构化输出，输入约 ¥0.2/百万 token），或<b>智谱 GLM-4V 系列</b>（国产、中文识别强、同为厘级量级）。避开两类误选：旗舰推理模型贵 10–50 倍还会输出思维链污染结构化结果；纯文本模型（如 DeepSeek）不支持视觉。</div>
+          <div class="k">结果</div><div class="v"><b>体积 −79%，识别不降</b>；单次识别成本约<b>万分之二元，1 元可跑数千次</b>。原型用免密钥方案省去后端代理，规模化再切按量计费的轻量模型 API——把成本纳入体验设计，不是一味压缩，而是把成本花在关键处。</div>
         </div>
       </div>
 
       <div class="issue">
-        <div class="top"><span class="idx">3</span><h3>归因表全铺开，用户根本不看</h3><span class="tag product">产品设计</span></div>
+        <div class="top"><span class="idx">3</span><h3>海量资产，该不该做成数据库？</h3><span class="tag arch">架构决策</span></div>
         <div class="rows">
-          <div class="k">问题</div><div class="v">原本把四张评分归因表平铺在详情里，普通买家不会读，专业买家才需要核对——但两者被同等对待。</div>
-          <div class="k">怎么做</div><div class="v">改成<b>渐进披露</b>：首屏只给一句话结论 + 一正一负两条提醒；完整归因收进"这个分怎么算的"折叠区；风险提示只列需要留意的项，没有风险就显示绿色提示。</div>
-          <div class="k">结果</div><div class="v">普通用户看结论就走，专业用户可按需深挖。可解释性保留，但不变成强制阅读。</div>
-        </div>
-      </div>
-
-      <div class="issue">
-        <div class="top"><span class="idx">4</span><h3>对比表十几行全打星，等于没说</h3><span class="tag product">产品设计</span></div>
-        <div class="rows">
-          <div class="k">问题</div><div class="v">13 维对比里真正有区分度的只有售价/授权/综合分 3 行，其余各家同值却全打★，制造"各有优势"的错觉，用户还是不知道买哪个。</div>
-          <div class="k">怎么做</div><div class="v">加<b>决策摘要</b>：按可商用优先 → 综合分高优先 → 同分区间价低排序，直接给出推荐项和理由；平局维度灰显不再打星；授权受限一票否决标红。</div>
-          <div class="k">结果</div><div class="v">从"看表格"变成"得结论"，对比真正服务于决策。</div>
-        </div>
-      </div>
-
-      <div class="issue">
-        <div class="top"><span class="idx">5</span><h3>图片卡片破裂 + 评估要点显示成单字</h3><span class="tag eng">工程优化</span></div>
-        <div class="rows">
-          <div class="k">问题</div><div class="v">结果卡片图片显示 broken；"评估要点"只显示"品/风/主"单字且全是橙色告警。</div>
-          <div class="k">怎么做</div><div class="v">我定位到两个根因：一个是图片路径依赖预览环境，改成内联、彻底去掉目录依赖；另一个是评估要点的<b>数据结构错了</b>，一次推入了两个元素，统一结构后恢复。两处都交给实现修正并逐一验证。</div>
-          <div class="k">结果</div><div class="v"><b>26/26 图片全部加载成功，要点文案与告警状态恢复正常。</b>两个都是"看起来是样式、其实是数据"的问题——这类细节不修，用户会觉得产品粗糙。</div>
-        </div>
-      </div>
-
-      <div class="issue">
-        <div class="top"><span class="idx">6</span><h3>上传草图太费 token，成本划不来</h3><span class="tag eng">工程优化</span></div>
-        <div class="rows">
-          <div class="k">问题</div><div class="v">用户上传的手绘草图常带大片白边、分辨率过高，直接送多模态模型会消耗大量 token。</div>
-          <div class="k">怎么做</div><div class="v">上传先做预处理：扫描非白像素包围盒裁白边 → 长边缩放到 1024 → JPEG 0.82 压缩，再送给视觉模型。同时评测过换更便宜的模型，但纯前端直连会暴露 API key、必须加后端代理，原型阶段不划算，因此保留无密钥方案。</div>
-          <div class="k">结果</div><div class="v"><b>草图体积 20KB→4KB，降约 79%</b>，真实视觉模型对主体/风格/品类的识别不降反稳。</div>
-        </div>
-      </div>
-
-      <div class="issue">
-        <div class="top"><span class="idx">7</span><h3>落地成扣子工作流：不能因为只有 26 个资产就内嵌</h3><span class="tag arch">架构决策</span></div>
-        <div class="rows">
-          <div class="k">问题</div><div class="v">要把原型变成通用工作流。看似省事的做法是把 26 个资产写死进代码节点，但这违背 RAG 的本意——资产一变就要改代码。</div>
-          <div class="k">怎么做</div><div class="v">坚持标准 RAG：资产进扣子知识库，多模态节点一次输出结构化 query 去检索，代码节点只处理召回结果做确定性打分，再判断空结果、组装、回复。过程中连排三个坑：① 输出格式贴的是 JSON Schema 而非样例，导致模型照抄字段说明 → 改贴真实样例；② 扣子召回把 JSON 文本化（数值变字符串、数组变 a|b|c），打分做除法报 str/int → 加类型归一化；③ 图片没绑到"视觉理解输入"，模型看不到图 → 补绑定。</div>
-          <div class="k">结果</div><div class="v"><b>12 节点全链路跑通</b>，资产零内嵌、增减只改知识库。识别成库里没有的品类（如牦牛）时返回空结果并友好提示，而非硬塞不相干资产。</div>
+          <div class="k">问题</div><div class="v">26 个资产用扣子知识库验证逻辑没问题，但真实业务是几十万到上百万个 3D 资产——文档型知识库撑不起海量，也不擅长结构化过滤。判断：不做二选一，要分层。</div>
+          <div class="k">怎么做</div><div class="v"><b>生产级最佳方案</b>：① 结构化字段（品类/风格/价格/授权/面数/格式）进 PostgreSQL 等关系库，做精确过滤与分面；② 把"名称+标签+描述"拼成文本做 embedding，进向量索引（pgvector / Milvus / Elasticsearch）做语义召回；③ 查询时先按结构化条件<b>硬过滤</b>（预算、仅可商用、指定品类）缩小候选，再<b>向量语义召回 + 关键词精确匹配（BM25）两路并行</b>、融合重排后交给确定性打分；④ 主库存源数据（唯一真相），向量索引是可重建的派生副本。</div>
+          <div class="k">结果</div><div class="v"><b>规模路径</b>：几十万级用 PostgreSQL + pgvector 一套搞定，百万级以上再上 Milvus / ES 独立向量库。<b>现在的 RAG + 零内嵌就是这个架构的最小验证版——换库不动打分逻辑。</b></div>
         </div>
       </div>
 
     </div>
+
+    <details class="more-iter">
+      <summary>收起的早期迭代（资产真实化 · 对比决策 · 体验细节，点击展开）</summary>
+      <div class="mini">
+        <b>资产数据真实化</b>：原型最初用 12 个模拟资产，改用无头浏览器渲染 DOM 再解析，拿到 26 个真实资产，26/26 命中。<br>
+        <b>对比服务于决策</b>：13 维对比里只有 3 行有区分度，加决策摘要、平局灰显、授权一票否决，从"看表格"变"得结论"。<br>
+        <b>体验细节稳定性</b>：修复图片破裂与评估要点显示问题，26/26 图片正常加载。
+      </div>
+    </details>
   </section>
 
   <section>
@@ -288,7 +258,7 @@
 
   <section>
     <div class="sec-head"><div class="no">04 · 一体两面</div><h2>同一套设计，用两种形态验证</h2>
-      <p>前端原型和扣子工作流不是"重复做了两遍"，也不是"没接起来的半成品"——它们是同一套逻辑的两端：一端验证产品体验，一端验证可规模化落地。演示时讲成一体两面，比硬拼成一个系统更诚实、也更稳。</p></div>
+      <p>前端原型和扣子工作流，验证的是同一套逻辑的两端：一端看用户能不能用、愿不愿用，一端看能不能接真实大库、能不能上线。两种形态各自把该验证的验证到位。</p></div>
     <div class="twoface">
       <div class="face f-ux">
         <div class="cap">一端 · 前端可运行原型</div>
@@ -313,7 +283,7 @@
         </ul>
       </div>
     </div>
-    <div class="bridge"><b>我的工程化思维体现在哪：</b>不是我亲自写代码，而是我在设计阶段就想清楚了四件事——<b>数据和逻辑要解耦</b>（资产进知识库，增减不影响系统）、<b>成本要可控</b>（草图压缩 −79%）、<b>结果要可复现</b>（确定性规则打分，同一输入永远同一结论）、<b>风险要提前识别</b>（落地的三处坑在联调前就定好约束）。这些判断让方案能被工程团队直接接手、少返工——这就是"能把想法推动落地"的能力。</div>
+    <div class="bridge"><b>我的工程化思维体现在哪：</b>在设计阶段就想清楚了四件事——<b>数据和逻辑要解耦</b>（资产进知识库，增减不影响系统）、<b>成本要可控</b>（草图压缩 −79% + 轻量模型选型）、<b>结果要可复现</b>（确定性规则打分，同一输入永远同一结论）、<b>风险要提前识别</b>（落地时的三处风险在联调前就定好约束）。这些判断让方案能被工程团队直接接手、少返工。</div>
     <div class="bridge" style="background:var(--white);border-color:var(--line);color:var(--muted)"><b style="color:var(--ink)">两种形态怎么配合：</b>前端验证产品体验（渐进披露、并排决策、草图压缩，可上手点、离线也能演示）；工作流验证规模化落地（资产零内嵌、增减只改知识库、12 节点跑通、可发布 Bot/API）。两者共享同一套"理解→检索→打分→结论"逻辑。演示时先放前端让人上手，再放工作流证明能落地；真要产品化时，前端改调工作流 API 即可对接。</div>
   </section>
 
@@ -336,7 +306,7 @@
       <div class="biz-card">
         <div class="step">路径三 · 长期壁垒</div>
         <h3>评分规则与标签资产</h3>
-        <p>沉淀"什么资产在什么场景该给什么分"的验证过的评分规则与结构化标签，形成可迁移、抄不走的行业 know-how。</p>
+        <p>沉淀"什么资产在什么场景该给什么分"的验证过的评分规则与结构化标签，形成可迁移、难以复制的行业 know-how。</p>
         <div class="how">能力底座 / 对外授权</div>
       </div>
     </div>
