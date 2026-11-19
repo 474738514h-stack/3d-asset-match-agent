@@ -1,0 +1,9 @@
+.DS_Store
+*.log
+preview*.png
+web-preview.png
+print-preview.png
+*.tmp
+node_modules/
+.vscode/
+.idea/
