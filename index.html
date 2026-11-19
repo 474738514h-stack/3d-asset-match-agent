@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>智能 3D 资产匹配与评估 Agent</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- 顶部 -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 32 32" width="22" height="22" fill="none"><path d="M16 3 28 9.5v13L16 29 4 22.5v-13L16 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 9.5 16 16l12-6.5M16 16v13" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="brand-text">
+        <strong>Match3D <span>Agent</span></strong>
+        <small>智能资产匹配与评估</small>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="status-dot"></span><span class="status-text">多模态视觉已接入 · Mita3D 真实资产</span>
+      <button class="ghost-btn" id="resetBtn" title="重置">↺ 重置</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- 左侧：需求输入 -->
+    <section class="panel input-panel">
+      <div class="panel-head">
+        <div class="step-badge">1</div>
+        <div><h2>描述你的需求</h2><p>上传商品图 / 草图，或用文字描述</p></div>
+      </div>
+
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="fileInput" accept="image/*" hidden />
+        <div class="upload-placeholder" id="uploadPlaceholder">
+          <div class="upload-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <p><b>点击上传</b> 或拖拽图片到此处</p>
+          <small>支持商品照片、设计草图、参考图（JPG / PNG / WEBP）</small>
+        </div>
+        <div class="upload-preview hidden" id="uploadPreview">
+          <img id="previewImg" alt="预览" />
+          <div class="preview-info"><span id="fileName">—</span><button id="removeFile" class="link-btn">移除</button></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="reqText">补充描述 <span class="optional">选填，可显著提升匹配度</span></label>
+        <textarea id="reqText" rows="3" placeholder="例：科幻机甲角色，用于游戏展示；或写实动物、设计师款球鞋…"></textarea>
+        <div class="quick-prompts">
+          <button class="chip prompt-chip" data-prompt="科幻机甲角色，用于游戏展示">机甲角色</button>
+          <button class="chip prompt-chip" data-prompt="白色运动鞋，设计师款，电商主图">设计师球鞋</button>
+          <button class="chip prompt-chip" data-prompt="犀牛动物模型，写实">写实犀牛</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>使用场景 <span class="optional">影响分辨率评估标准</span></label>
+        <div class="scene-chips" id="sceneChips">
+          <button class="chip scene-chip active" data-scene="realtime">实时预览</button>
+          <button class="chip scene-chip" data-scene="render">电商主图</button>
+          <button class="chip scene-chip" data-scene="ar">AR / VR</button>
+          <button class="chip scene-chip" data-scene="film">影视特写</button>
+        </div>
+      </div>
+
+      <button class="primary-btn" id="matchBtn">
+        <span class="btn-spark">✦</span> 开始智能匹配
+      </button>
+      <p class="input-hint">上传图片后，多模态大模型会识别品类、主体、材质与色彩，再检索资产并评估</p>
+    </section>
+
+    <!-- 右侧：匹配结果 -->
+    <section class="panel result-panel" id="resultPanel">
+      <!-- 空状态 -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-ill">
+          <svg viewBox="0 0 120 120" width="120" height="120" fill="none">
+            <circle cx="60" cy="60" r="46" stroke="#E5E0FA" stroke-width="2" stroke-dasharray="5 6"/>
+            <path d="M40 60 54 74 82 46" stroke="#9C8CE0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>等待你的需求</h3>
+        <p>在左侧上传图片或填写描述，<br/>Agent 会在这里展示匹配到的 3D 资产与评估详情。</p>
+      </div>
+
+      <!-- 处理中 -->
+      <div class="processing hidden" id="processing">
+        <div class="processing-head"><div class="spinner"></div><h3>Agent 正在理解你的需求…</h3></div>
+        <ol class="process-steps" id="processSteps">
+          <li data-step="0">接收图像 / 文本输入</li>
+          <li data-step="1">多模态大模型识别品类、主体、材质、色彩</li>
+          <li data-step="2">向量检索资产库（26 个模型）</li>
+          <li data-step="3">计算兼容性 · 分辨率 · 价格评估</li>
+        </ol>
+      </div>
+
+      <!-- 结果内容 -->
+      <div class="result-content hidden" id="resultContent">
+        <div class="intent-card">
+          <div class="intent-icon">✦</div>
+          <div class="intent-body">
+            <div class="intent-top"><h3>需求理解结果</h3><span class="confidence" id="confidence">置信度 0%</span></div>
+            <p id="intentSummary">—</p>
+            <div class="intent-tags" id="intentTags"></div>
+          </div>
+        </div>
+
+        <div class="result-toolbar">
+          <div><h3>匹配结果 <span class="count" id="matchCount">0</span></h3><small>按综合评分排序</small></div>
+          <div class="toolbar-controls">
+            <label class="sort-label">排序
+              <select id="sortSelect">
+                <option value="overall">综合评分</option>
+                <option value="compatibility">兼容性</option>
+                <option value="resolution">分辨率</option>
+                <option value="price">价格优势</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="result-grid" id="resultGrid"></div>
+      </div>
+
+      <!-- 并排对比浮动栏 -->
+      <div class="compare-bar hidden" id="compareBar">
+        <div class="cb-left">
+          <span class="cb-label">对比资产</span>
+          <div class="cb-thumbs" id="cbThumbs"></div>
+          <span class="cb-hint" id="cbHint">勾选 2–3 个资产</span>
+        </div>
+        <div class="cb-actions">
+          <button class="cb-clear" id="cbClear">清空</button>
+          <button class="cb-go" id="cbGo" disabled>开始对比</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 并排对比面板 -->
+  <div class="compare-overlay hidden" id="compareOverlay">
+    <div class="compare-modal">
+      <div class="cm-head">
+        <div><h3>资产并排对比</h3><small>最优值以高亮标示 · <span class="src-badge verified">● 站点核验</span> 与 <span class="src-badge estimated">○ 估算</span> 已区分</small></div>
+        <button class="cm-close" id="cmClose">✕</button>
+      </div>
+      <div class="cm-body" id="cmBody"></div>
+    </div>
+  </div>
+
+  <!-- 评估详情抽屉 -->
+  <div class="drawer-overlay hidden" id="drawerOverlay"></div>
+  <aside class="drawer" id="drawer">
+    <div class="drawer-head">
+      <div><small>评估详情</small><h3 id="drawerTitle">资产名称</h3></div>
+      <button class="icon-btn" id="closeDrawer">✕</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+    <div class="drawer-foot">
+      <button class="ghost-btn" id="drawerClose2">关闭</button>
+      <button class="primary-btn small" id="selectAsset">选用此资产 ✓</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tencent-ai/workbuddy-cloud-sdk@dev/lib/index.global.js"></script>
+  <script src="js/images.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/vision.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

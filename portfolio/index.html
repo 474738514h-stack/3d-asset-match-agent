@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Match3D Agent · 作品集 | 智能 3D 资产匹配与评估</title>
+<style>
+  :root{
+    --ink:#1b1d2a; --muted:#666b7d; --line:#e7e8f0; --primary:#5b4bd6;
+    --primary-soft:#f0edff; --green:#12805c; --green-soft:#e7f6ef;
+    --amber:#a8740a; --amber-soft:#fdf5e3; --bg:#f6f6fa; --white:#fff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:0 26px}
+
+  header{background:var(--white);border-bottom:1px solid var(--line)}
+  .head-in{max-width:960px;margin:0 auto;padding:18px 26px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px}
+  .logo{width:32px;height:32px;border-radius:9px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px}
+  .brand small{display:block;font-size:11px;font-weight:400;color:var(--muted)}
+  .head-tag{font-size:12px;color:var(--primary);background:var(--primary-soft);padding:6px 13px;border-radius:20px;font-weight:600}
+
+  .hero{padding:52px 0 40px;text-align:center}
+  .eyebrow{font-size:12px;color:var(--primary);font-weight:700;letter-spacing:2px;margin-bottom:14px}
+  .hero h1{font-size:36px;line-height:1.3;margin:0 0 14px;letter-spacing:-.5px}
+  .hero h1 em{font-style:normal;color:var(--primary)}
+  .lede{font-size:16px;color:var(--muted);max-width:660px;margin:0 auto 20px}
+  .role{display:inline-block;font-size:12.5px;color:var(--green);background:var(--green-soft);padding:6px 15px;border-radius:20px;font-weight:600}
+  .metrics{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:26px}
+  .metric{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:13px 24px;min-width:118px}
+  .metric b{display:block;font-size:24px;color:var(--primary);font-variant-numeric:tabular-nums}
+  .metric span{font-size:12px;color:var(--muted)}
+
+  /* 演示入口 */
+  .demo{max-width:960px;margin:0 auto;padding:0 26px}
+  .demo-box{background:linear-gradient(120deg,#5b4bd6,#7a6bef);border-radius:16px;padding:24px 28px;color:#fff;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .demo-box h3{margin:0 0 5px;font-size:19px}
+  .demo-box p{margin:0;font-size:13px;opacity:.9;max-width:560px}
+  .demo-btn{display:inline-block;background:#fff;color:var(--primary);font-weight:700;font-size:14px;
+    padding:11px 22px;border-radius:10px;text-decoration:none;white-space:nowrap}
+  .demo-btn.pending{background:rgba(255,255,255,.2);color:#fff;cursor:default}
+
+  section{padding:44px 0;border-top:1px solid var(--line);margin-top:10px}
+  .sec-head{margin-bottom:24px}
+  .sec-head .no{font-size:12px;color:var(--primary);font-weight:700;letter-spacing:1px}
+  .sec-head h2{font-size:25px;margin:5px 0 7px}
+  .sec-head p{color:var(--muted);margin:0;max-width:760px;font-size:14px}
+
+  .goal{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .goal .card{background:var(--white);border:1px solid var(--line);border-radius:13px;padding:20px}
+  .goal .card h3{margin:0 0 7px;font-size:15px}
+  .goal .card p{margin:0;color:var(--muted);font-size:13.5px}
+  .goal .pain h3{color:#b23b3b}
+
+  /* 问题-解法卡片 */
+  .issues{display:flex;flex-direction:column;gap:14px}
+  .issue{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:20px 22px;position:relative;overflow:hidden}
+  .issue::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--primary)}
+  .issue .top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .issue .idx{flex:none;width:26px;height:26px;border-radius:8px;background:var(--primary-soft);color:var(--primary);
+    font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .issue .top h3{margin:0;font-size:16px}
+  .issue .tag{margin-left:auto;font-size:11px;padding:3px 10px;border-radius:12px;font-weight:600;white-space:nowrap}
+  .tag.product{background:var(--green-soft);color:var(--green)}
+  .tag.eng{background:var(--amber-soft);color:var(--amber)}
+  .tag.arch{background:var(--primary-soft);color:var(--primary)}
+  .rows{display:grid;grid-template-columns:78px 1fr;gap:8px 14px;font-size:13.5px}
+  .rows .k{color:var(--muted);font-weight:600}
+  .rows .v{color:#3b4052}
+  .rows .v b{color:var(--ink)}
+
+  .flow{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch}
+  .step{flex:1;min-width:120px;background:var(--white);border:1px solid var(--line);border-radius:11px;padding:15px;text-align:center}
+  .step .n{width:24px;height:24px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:12px;font-weight:700}
+  .step b{font-size:13.5px;display:block}
+  .step span{font-size:11.5px;color:var(--muted)}
+
+  .shot{margin-bottom:26px}
+  .shot-bar{display:flex;align-items:baseline;gap:10px;margin-bottom:9px;flex-wrap:wrap}
+  .shot-bar h3{font-size:15px;margin:0}
+  .shot-bar p{font-size:12.5px;color:var(--muted);margin:0}
+  .shot-img{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:8px;overflow:hidden}
+  .shot-img img{display:block;width:100%;border-radius:7px}
+  .shot-img.scroll{overflow-x:auto}
+  .shot-img.scroll img{width:1400px;max-width:none}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+  .note{background:var(--amber-soft);border:1px solid #f0dfb6;border-radius:12px;padding:17px 20px;font-size:13px;color:#7a6428}
+  .note b{color:#5c4810}
+
+  .decide{background:var(--primary-soft);border:1px solid #d9d2ff;border-radius:14px;padding:20px 24px;margin-top:20px}
+  .decide .big{font-size:17px;font-weight:700;color:var(--primary);line-height:1.5;margin-bottom:6px}
+  .decide p{font-size:13.5px;color:#4b4570;margin:0}
+  .three-q{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+  .three-q .q{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .three-q .q .qn{font-size:11px;color:var(--primary);font-weight:700;letter-spacing:1px}
+  .three-q .q h4{margin:6px 0 4px;font-size:15px}
+  .three-q .q p{margin:0;font-size:12.5px;color:var(--muted)}
+  .twoface{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .face{border-radius:14px;padding:22px;border:1px solid var(--line);background:var(--white)}
+  .face.f-ux{border-top:3px solid var(--primary)}
+  .face.f-flow{border-top:3px solid var(--green)}
+  .face .cap{font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:8px}
+  .face.f-ux .cap{color:var(--primary)}
+  .face.f-flow .cap{color:var(--green)}
+  .face h3{margin:0 0 8px;font-size:16px}
+  .face p{margin:0 0 12px;font-size:13.5px;color:var(--muted)}
+  .face ul{margin:0;padding-left:18px;font-size:13px;color:#3b4052;line-height:1.8}
+  .bridge{margin-top:18px;background:var(--green-soft);border:1px solid #cfe9dc;border-radius:12px;padding:15px 20px;font-size:13px;color:#1c664b}
+  .bridge b{color:#0f4d36}
+  .biz-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .biz-card{background:var(--white);border:1px solid var(--line);border-radius:13px;padding:20px}
+  .biz-card .step{font-size:11px;font-weight:700;color:var(--primary);letter-spacing:1px}
+  .biz-card h3{margin:8px 0;font-size:15px}
+  .biz-card p{margin:0 0 10px;font-size:13px;color:var(--muted)}
+  .biz-card .how{font-size:12.5px;color:var(--green);font-weight:600}
+
+  footer{padding:30px 0 44px;text-align:center;color:var(--muted);font-size:12px;border-top:1px solid var(--line);background:var(--white);margin-top:20px}
+
+  @media(max-width:680px){
+    .hero h1{font-size:27px}.goal,.two{grid-template-columns:1fr}
+    .rows{grid-template-columns:1fr;gap:2px}.rows .v{margin-bottom:8px}
+    .metric{min-width:100px;padding:11px 16px}
+    .three-q,.biz-grid,.twoface{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body data-demo-url="https://asset-match-agent.app.workbuddy.host/?sharecode=IWWADXEH6T">
+<header>
+  <div class="head-in">
+    <div class="brand"><span class="logo">◈</span><div>Match3D Agent<small>智能 3D 资产匹配与评估 Agent</small></div></div>
+    <span class="head-tag">作品集 · 可运行原型</span>
+  </div>
+</header>
+
+<div class="hero wrap">
+  <div class="eyebrow">PRODUCT CASE STUDY</div>
+  <h1>不是帮人<em>找到</em>，<br>是帮人在不确定中<em>做决策</em></h1>
+  <p class="lede">这个工具最值钱的地方，不是"帮人找东西"，而是帮人在不确定中快速做决策。风格对不对、能不能用、值不值这个价——这三个问题在采购流程里反复出现，而它能一次性给出答案。</p>
+  <p class="lede" style="font-size:14px;margin-top:-8px">买家只上传一张参考图、草图，或一句模糊想法，系统就从兼容性、画质、价格三个维度给出可解释的评估与"买哪个"的结论。从问题定义到落地验证，全程由我推动。</p>
+  <span class="role">AI 产品经理 · 独立定义并推动落地</span>
+  <div class="metrics">
+    <div class="metric"><b>26</b><span>真实平台资产</span></div>
+    <div class="metric"><b>−79%</b><span>草图体积优化</span></div>
+    <div class="metric"><b>7</b><span>关键问题解决</span></div>
+    <div class="metric"><b>12</b><span>节点工作流跑通</span></div>
+  </div>
+</div>
+
+<div class="demo">
+  <div class="demo-box">
+    <div>
+      <h3>▶ 在线演示</h3>
+      <p id="demoDesc">原型已接入真实多模态视觉理解，上传草图即可体验智能匹配。</p>
+    </div>
+    <a class="demo-btn" id="demoBtn" href="https://asset-match-agent.app.workbuddy.host/?sharecode=IWWADXEH6T" target="_blank" rel="noopener">打开演示 →</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <section>
+    <div class="sec-head"><div class="no">01 · 目标与思路</div><h2>把"找与比"，收敛成一句话结论</h2>
+      <p>买家往往只有一张参考图或一个模糊想法，却要在大量模型里逐个比对风格、面数、授权和价格。目标是让系统替用户完成筛选与判断。</p></div>
+    <div class="goal">
+      <div class="card pain"><h3>采购中反复出现的三个问题</h3><p><b>① 风格对不对</b>：参考图和候选资产的风格是否匹配。<br><b>② 能不能用</b>：授权能否商用、画质/面数够不够目标场景。<br><b>③ 值不值这个价</b>：同类资产价差大，缺可比基准。<br>买家手上往往只有一张图或一句模糊想法，只能逐个模型比对，三个问题每次采购都要重新回答一遍。</p></div>
+      <div class="card"><h3>我的产品思路</h3><p>多模态理解需求 → 相关性过滤 → 可解释评分 → 渐进披露 → 并排对比给结论。全程把结论摆在最前，把证据放在用户需要时展开；并让架构可规模化——资产走知识库，不写死在代码里。<br><br>核心标准只有一个：<b>每一句话，是不是帮用户更快做了决定</b>，而不是"功能是不是更炫"。</p></div>
+    </div>
+    <div class="decide">
+      <div class="big">买家真正卡住的不是"找不到"，而是"找到了不敢拍板"。</div>
+      <p>所以这不是一个检索工具，是一个决策辅助工具。搜索给的是一列结果，决策给的是"该选哪个、为什么"——后者才是采购场景里真正稀缺的东西。</p>
+    </div>
+    <div class="bridge" style="background:var(--primary-soft);border-color:#d9d2ff;color:#4b4570">
+      <b style="color:var(--primary)">我的角色 · AI 产品经理：</b>这个项目从问题定义、方案取舍到落地验证由我一人推动。我不写代码，但我做三件事——<b>定义对的问题、做对的取舍、推动真正落地</b>。我清楚技术能做什么、不能做什么、代价是什么，所以我定的方案工程师能直接接、不返工，我给的预期也靠谱。下面每一条都是一次产品判断，而非一次技术炫技。
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><div class="no">02 · 迭代优化记录</div><h2>七个关键判断，决定了产品能不能用</h2>
+      <p>从"一个想法"到"一个能拍板的决策工具"，经历 7 轮优化。每轮我先判断问题值不值得解决、该解决到什么程度，再定方案、推动落地。技术不难，难在判断。</p></div>
+    <div class="issues">
+
+      <div class="issue">
+        <div class="top"><span class="idx">1</span><h3>演示资产是编的，没有说服力</h3><span class="tag arch">架构决策</span></div>
+        <div class="rows">
+          <div class="k">问题</div><div class="v">原型最初用 12 个模拟资产，数据自说自话，无法证明能接真实平台。</div>
+          <div class="k">怎么做</div><div class="v">公司站点是 Nuxt 服务端渲染关闭的 SPA，普通抓取拿不到资产。用无头浏览器渲染出 DOM 再解析，拿到 26 个真实资产的名称/价格/图片；再用关键词逐个搜索内部接口，按图片尾号精确匹配到资产 ID，26/26 全部命中，回填真实分类、体积、格式、热度。</div>
+          <div class="k">结果</div><div class="v"><b>资产从"编的"变成"真的"</b>。对站点未公开的面数、贴图、PBR，明确标注为估算，不冒充真实数据。</div>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="top"><span class="idx">2</span><h3>搜索犀牛，却混进发动机、狗屋、鸟</h3><span class="tag product">产品设计</span></div>
+        <div class="rows">
+          <div class="k">问题</div><div class="v">评估函数对全量资产打分后全部返回，低分资产也留在结果里，直接破坏用户信任。</div>
+          <div class="k">怎么做</div><div class="v">设计两级锚点过滤：<b>具体名词</b>（犀牛、机甲、球鞋）为强锚点，只在名称和标签里精确匹配；<b>泛类</b>（动物、角色）为弱锚点兜底；再加停用词表过滤模型给出的"模型/物品"等无意义主体。</div>
+          <div class="k">结果</div><div class="v">搜犀牛只返回犀牛一条（兼容 93 分），"搜什么出什么"，结果可信度大幅提升。</div>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="top"><span class="idx">3</span><h3>归因表全铺开，用户根本不看</h3><span class="tag product">产品设计</span></div>
+        <div class="rows">
+          <div class="k">问题</div><div class="v">原本把四张评分归因表平铺在详情里，普通买家不会读，专业买家才需要核对——但两者被同等对待。</div>
+          <div class="k">怎么做</div><div class="v">改成<b>渐进披露</b>：首屏只给一句话结论 + 一正一负两条提醒；完整归因收进"这个分怎么算的"折叠区；风险提示只列需要留意的项，没有风险就显示绿色提示。</div>
+          <div class="k">结果</div><div class="v">普通用户看结论就走，专业用户可按需深挖。可解释性保留，但不变成强制阅读。</div>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="top"><span class="idx">4</span><h3>对比表十几行全打星，等于没说</h3><span class="tag product">产品设计</span></div>
+        <div class="rows">
+          <div class="k">问题</div><div class="v">13 维对比里真正有区分度的只有售价/授权/综合分 3 行，其余各家同值却全打★，制造"各有优势"的错觉，用户还是不知道买哪个。</div>
+          <div class="k">怎么做</div><div class="v">加<b>决策摘要</b>：按可商用优先 → 综合分高优先 → 同分区间价低排序，直接给出推荐项和理由；平局维度灰显不再打星；授权受限一票否决标红。</div>
+          <div class="k">结果</div><div class="v">从"看表格"变成"得结论"，对比真正服务于决策。</div>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="top"><span class="idx">5</span><h3>图片卡片破裂 + 评估要点显示成单字</h3><span class="tag eng">工程优化</span></div>
+        <div class="rows">
+          <div class="k">问题</div><div class="v">结果卡片图片显示 broken；"评估要点"只显示"品/风/主"单字且全是橙色告警。</div>
+          <div class="k">怎么做</div><div class="v">我定位到两个根因：一个是图片路径依赖预览环境，改成内联、彻底去掉目录依赖；另一个是评估要点的<b>数据结构错了</b>，一次推入了两个元素，统一结构后恢复。两处都交给实现修正并逐一验证。</div>
+          <div class="k">结果</div><div class="v"><b>26/26 图片全部加载成功，要点文案与告警状态恢复正常。</b>两个都是"看起来是样式、其实是数据"的问题——这类细节不修，用户会觉得产品粗糙。</div>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="top"><span class="idx">6</span><h3>上传草图太费 token，成本划不来</h3><span class="tag eng">工程优化</span></div>
+        <div class="rows">
+          <div class="k">问题</div><div class="v">用户上传的手绘草图常带大片白边、分辨率过高，直接送多模态模型会消耗大量 token。</div>
+          <div class="k">怎么做</div><div class="v">上传先做预处理：扫描非白像素包围盒裁白边 → 长边缩放到 1024 → JPEG 0.82 压缩，再送给视觉模型。同时评测过换更便宜的模型，但纯前端直连会暴露 API key、必须加后端代理，原型阶段不划算，因此保留无密钥方案。</div>
+          <div class="k">结果</div><div class="v"><b>草图体积 20KB→4KB，降约 79%</b>，真实视觉模型对主体/风格/品类的识别不降反稳。</div>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="top"><span class="idx">7</span><h3>落地成扣子工作流：不能因为只有 26 个资产就内嵌</h3><span class="tag arch">架构决策</span></div>
+        <div class="rows">
+          <div class="k">问题</div><div class="v">要把原型变成通用工作流。看似省事的做法是把 26 个资产写死进代码节点，但这违背 RAG 的本意——资产一变就要改代码。</div>
+          <div class="k">怎么做</div><div class="v">坚持标准 RAG：资产进扣子知识库，多模态节点一次输出结构化 query 去检索，代码节点只处理召回结果做确定性打分，再判断空结果、组装、回复。过程中连排三个坑：① 输出格式贴的是 JSON Schema 而非样例，导致模型照抄字段说明 → 改贴真实样例；② 扣子召回把 JSON 文本化（数值变字符串、数组变 a|b|c），打分做除法报 str/int → 加类型归一化；③ 图片没绑到"视觉理解输入"，模型看不到图 → 补绑定。</div>
+          <div class="k">结果</div><div class="v"><b>12 节点全链路跑通</b>，资产零内嵌、增减只改知识库。识别成库里没有的品类（如牦牛）时返回空结果并友好提示，而非硬塞不相干资产。</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><div class="no">03 · 最终链路与界面</div><h2>从需求到结论，一条链跑通</h2></div>
+    <div class="flow">
+      <div class="step"><div class="n">1</div><b>多模态解析</b><span>图/文字→结构化意图</span></div>
+      <div class="step"><div class="n">2</div><b>知识库检索</b><span>query 召回候选资产</span></div>
+      <div class="step"><div class="n">3</div><b>确定性打分</b><span>过滤+评分+排序</span></div>
+      <div class="step"><div class="n">4</div><b>空结果判断</b><span>有果/无果分支</span></div>
+      <div class="step"><div class="n">5</div><b>结果组装</b><span>拼 Markdown</span></div>
+      <div class="step"><div class="n">6</div><b>回复</b><span>给出结论</span></div>
+    </div>
+    <div style="height:26px"></div>
+    <div class="shot">
+      <div class="shot-bar"><h3>扣子工作流 · 全链路运行成功</h3><p>12 个节点全部绿色通过，从多模态解析到回复。</p></div>
+      <div class="shot-img scroll"><img src="shots/6-coze-workflow.png" alt="扣子工作流全链路"></div>
+    </div>
+    <div class="two">
+      <div class="shot">
+        <div class="shot-bar"><h3>匹配结果</h3><p>需求理解标签 + 综合评分 + 三维评估。</p></div>
+        <div class="shot-img"><img src="shots/2-results.png" alt="匹配结果"></div>
+      </div>
+      <div class="shot">
+        <div class="shot-bar"><h3>草图预压缩</h3><p>20KB→4KB，−79%，识别不降。</p></div>
+        <div class="shot-img"><img src="shots/5-sketch-compress.png" alt="草图压缩"></div>
+      </div>
+    </div>
+    <div class="two">
+      <div class="shot">
+        <div class="shot-bar"><h3>渐进披露评估</h3><p>结论在前，归因按需展开。</p></div>
+        <div class="shot-img"><img src="shots/3-drawer.png" alt="评估抽屉"></div>
+      </div>
+      <div class="shot">
+        <div class="shot-bar"><h3>并排对比决策摘要</h3><p>直接推荐最优项并说明理由。</p></div>
+        <div class="shot-img"><img src="shots/4-compare.png" alt="对比决策"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><div class="no">04 · 一体两面</div><h2>同一套设计，用两种形态验证</h2>
+      <p>前端原型和扣子工作流不是"重复做了两遍"，也不是"没接起来的半成品"——它们是同一套逻辑的两端：一端验证产品体验，一端验证可规模化落地。演示时讲成一体两面，比硬拼成一个系统更诚实、也更稳。</p></div>
+    <div class="twoface">
+      <div class="face f-ux">
+        <div class="cap">一端 · 前端可运行原型</div>
+        <h3>验证产品体验</h3>
+        <p>可上手点、可上传草图，验证的是"用户看得懂、愿意用"。</p>
+        <ul>
+          <li>渐进披露：结论在前，归因按需展开</li>
+          <li>并排对比：决策摘要直给推荐</li>
+          <li>多模态识别 + 草图压缩 −79%</li>
+          <li>26 张真实图内联，离线也能完整演示</li>
+        </ul>
+      </div>
+      <div class="face f-flow">
+        <div class="cap">另一端 · 扣子 RAG 工作流</div>
+        <h3>验证可规模化落地</h3>
+        <p>资产进知识库、代码零内嵌，验证的是"能接真实大库、能上线"。</p>
+        <ul>
+          <li>标准 RAG：检索 → 确定性打分 → 组装</li>
+          <li>增减资产只改知识库，不动代码</li>
+          <li>12 节点全链路跑通</li>
+          <li>可发布成 Bot / API 对外服务</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bridge"><b>我的工程化思维体现在哪：</b>不是我亲自写代码，而是我在设计阶段就想清楚了四件事——<b>数据和逻辑要解耦</b>（资产进知识库，增减不影响系统）、<b>成本要可控</b>（草图压缩 −79%）、<b>结果要可复现</b>（确定性规则打分，同一输入永远同一结论）、<b>风险要提前识别</b>（落地的三处坑在联调前就定好约束）。这些判断让方案能被工程团队直接接手、少返工——这就是"能把想法推动落地"的能力。</div>
+    <div class="bridge" style="background:var(--white);border-color:var(--line);color:var(--muted)"><b style="color:var(--ink)">两种形态怎么配合：</b>前端验证产品体验（渐进披露、并排决策、草图压缩，可上手点、离线也能演示）；工作流验证规模化落地（资产零内嵌、增减只改知识库、12 节点跑通、可发布 Bot/API）。两者共享同一套"理解→检索→打分→结论"逻辑。演示时先放前端让人上手，再放工作流证明能落地；真要产品化时，前端改调工作流 API 即可对接。</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><div class="no">05 · 商业化模式</div><h2>按"决策价值"收费，不按"工具功能"收费</h2>
+      <p>搜索工具只能收流量费，一个帮企业缩短决策时间、避免错误采购的助手，是按价值定价的——一次选错模型的返工成本，往往就超过一套工具年费。这是溢价空间所在。</p></div>
+    <div class="biz-grid">
+      <div class="biz-card">
+        <div class="step">路径一 · 最快落地</div>
+        <h3>嵌入式选品助手</h3>
+        <p>给 3D 资产平台做嵌入式助手，买家上传参考图即得推荐结论，直接提升"搜索→购买"转化。</p>
+        <div class="how">按成交分成 / SaaS 年费</div>
+      </div>
+      <div class="biz-card">
+        <div class="step">路径二 · 可规模化</div>
+        <h3>通用决策 API</h3>
+        <p>把"理解需求→召回→确定性打分→可解释结论"封装成 API。这套骨架不只适用 3D 模型，家具、面料、工业零件等非标品采购都是同一问题。</p>
+        <div class="how">按调用量 / 套餐</div>
+      </div>
+      <div class="biz-card">
+        <div class="step">路径三 · 长期壁垒</div>
+        <h3>评分规则与标签资产</h3>
+        <p>沉淀"什么资产在什么场景该给什么分"的验证过的评分规则与结构化标签，形成可迁移、抄不走的行业 know-how。</p>
+        <div class="how">能力底座 / 对外授权</div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:18px"><b>诚实的前提：</b>面数、贴图、PBR、市场均价是演示估算，真商用需与平台打通真实数据；26 个资产只是验证，商用要接真实大库。而这套 RAG + 资产零内嵌的架构，恰恰为"换真实数据、扩资产规模"预留了可扩展性——换数据、扩规模，不用改一行代码。</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><div class="no">06 · 数据边界</div><h2>对数据来源保持诚实</h2></div>
+    <div class="note"><b>真实数据：</b>售价、官方分类、文件体积、平台格式、浏览下载量、发布年份、资产与作者编号，取自平台公开可见信息。<br>
+      <b>演示估算：</b>多边形面数、贴图分辨率、PBR、LOD、市场均价基准与评分，因平台未公开，均为演示估算，界面中以"估算"徽标区分。<br>
+      <b>离线自足：</b>资产数据与图片已做离线快照，接口变更或下线也能完整演示。</div>
+  </section>
+</div>
+
+<footer>Match3D Agent · 作品集 · AI 产品经理独立定义并推动落地 · 从问题定义到全链路跑通</footer>
+
+<script>
+  // 演示链接集中在这里：发布成功后把 body 的 data-demo-url 与下方 href 换成真实链接即可
+  (function(){
+    var url = document.body.getAttribute('data-demo-url') || '';
+    var btn = document.getElementById('demoBtn');
+    var desc = document.getElementById('demoDesc');
+    if (url && url.indexOf('http') === 0) {
+      btn.textContent = '打开演示 →';
+      btn.className = 'demo-btn';
+      btn.href = url;
+      desc.textContent = '原型已接入真实多模态视觉理解，上传草图即可体验智能匹配。';
+    }
+  })();
+</script>
+</body>
+</html>

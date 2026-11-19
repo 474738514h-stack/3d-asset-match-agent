@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Match3D Agent · 作品集（纸质版）</title>
+<style>
+  @page{size:A4;margin:14mm 15mm}
+  *{box-sizing:border-box}
+  body{margin:0;color:#1b1d2a;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:10px;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .top{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #5b4bd6;padding-bottom:9px;margin-bottom:11px}
+  .top h1{font-size:19px;margin:0 0 2px;letter-spacing:-.3px}
+  .top .sub{font-size:10px;color:#666}
+  .top .role{font-size:9px;color:#12805c;background:#e7f6ef;padding:4px 9px;border-radius:10px;font-weight:700;white-space:nowrap}
+  .lede{font-size:10.5px;color:#444;margin:0 0 11px}
+  .metrics{display:flex;gap:8px;margin-bottom:12px}
+  .metric{flex:1;border:1px solid #e2e3ec;border-radius:7px;padding:7px 4px;text-align:center}
+  .metric b{display:block;font-size:16px;color:#5b4bd6}
+  .metric span{font-size:8.5px;color:#666}
+  .sec-title{font-size:12px;font-weight:700;margin:13px 0 7px;padding-left:8px;border-left:3px solid #5b4bd6}
+  table{width:100%;border-collapse:collapse;font-size:9px}
+  th,td{border:1px solid #dcdde7;padding:5px 7px;vertical-align:top;text-align:left}
+  th{background:#f2f0fd;color:#3b2fa8;font-weight:700;font-size:9px}
+  td.no{width:20px;text-align:center;font-weight:700;color:#5b4bd6;background:#faf9ff}
+  td.kind{width:52px}
+  .tag{font-size:7.5px;padding:1px 5px;border-radius:7px;font-weight:700;white-space:nowrap}
+  .t-product{background:#e7f6ef;color:#12805c}
+  .t-eng{background:#fdf5e3;color:#a8740a}
+  .t-arch{background:#f0edff;color:#5b4bd6}
+  b{color:#1b1d2a}
+  .flow{margin-top:6px}
+  .flow .row{display:flex;gap:5px}
+  .flow .s{flex:1;border:1px solid #dcdde7;border-radius:6px;padding:5px 3px;text-align:center;font-size:8px}
+  .flow .s b{display:block;font-size:8.5px;margin-bottom:1px}
+  .flow .s span{color:#777;font-size:7.5px}
+  .foot{margin-top:12px;border-top:1px solid #e2e3ec;padding-top:7px;display:flex;justify-content:space-between;font-size:8px;color:#888}
+  .boundary{margin-top:10px;background:#fdf9ef;border:1px solid #f0e2bc;border-radius:7px;padding:8px 10px;font-size:8.5px;color:#7a6428}
+  .boundary b{color:#5c4810}
+  .extra{display:flex;gap:9px;margin-top:11px}
+  .extra .col{flex:1;border:1px solid #e2e3ec;border-radius:7px;padding:8px 10px}
+  .extra h4{margin:0 0 5px;font-size:10px;color:#5b4bd6}
+  .extra h4.g{color:#12805c}
+  .extra p{margin:0;font-size:8.3px;color:#555;line-height:1.55}
+  .extra b{color:#1b1d2a}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div>
+    <h1>Match3D Agent · 智能 3D 资产匹配与评估 Agent</h1>
+    <div class="sub">AI 产品经理 · 独立定义并推动落地 · 从问题定义到可运行原型 + 扣子 RAG 工作流全链路跑通</div>
+  </div>
+  <span class="role">产品案例 / Portfolio</span>
+</div>
+
+<p class="lede"><b>我的角色 · AI 产品经理：</b>我不写代码，但做三件事——定义对的问题、做对的取舍、推动真正落地；我清楚技术的边界与代价，所以方案能落地、预期靠谱。<b>定位：</b>这个工具不是"帮人找东西"，而是<b>帮人在不确定中快速做决策</b>——采购中反复出现的三个问题：风格对不对、能不能用、值不值这个价，买家只上传一张图或一句想法，Agent 就从兼容性、画质、价格给出可解释评估与"买哪个"的结论。</p>
+
+<div class="metrics">
+  <div class="metric"><b>26</b><span>真实平台资产</span></div>
+  <div class="metric"><b>−79%</b><span>草图体积优化</span></div>
+  <div class="metric"><b>7</b><span>关键问题解决</span></div>
+  <div class="metric"><b>12</b><span>工作流节点跑通</span></div>
+</div>
+
+<div class="sec-title">目标与思路</div>
+<table>
+  <tr><td style="width:88px"><b>三个决策问题</b></td><td>① 风格对不对：参考图与候选是否匹配；② 能不能用：授权可否商用、画质够不够；③ 值不值：同类价差大缺基准。买家只有一张图或模糊想法，三个问题每次采购都要重答一遍。</td></tr>
+  <tr><td><b>产品思路</b></td><td>多模态理解 → 相关性过滤 → 可解释评分 → 渐进披露 → 并排对比给结论；结论摆最前、证据按需展开；资产走知识库、不写死代码。核心标准：每句话是否帮用户更快做决定，而非功能更炫。真正卡住用户的不是"找不到"，而是"找到了不敢拍板"。</td></tr>
+</table>
+
+<div class="sec-title">迭代优化记录（七个关键判断）</div>
+<table>
+  <tr><th style="width:20px">#</th><th style="width:130px">问题</th><th style="width:60px">性质</th><th>怎么解决 → 结果</th></tr>
+  <tr>
+    <td class="no">1</td><td>演示资产是编的，没有说服力</td><td class="kind"><span class="tag t-arch">架构决策</span></td>
+    <td>站点是关闭 SSR 的 SPA，普通抓取拿不到数据 → 用无头浏览器渲染 DOM 再解析，拿到 26 个真实资产；关键词逐个搜内部接口、按图片尾号精确匹配 ID，26/26 命中，回填真实分类/体积/格式/热度。<b>资产从"编的"变"真的"；未公开的面数等明确标估算。</b></td>
+  </tr>
+  <tr>
+    <td class="no">2</td><td>搜犀牛却混进发动机、狗屋、鸟</td><td class="kind"><span class="tag t-product">产品设计</span></td>
+    <td>全量打分后不过滤，低分资产仍在 → 设计两级锚点：具体名词（犀牛/机甲）为强锚点只精确匹配，泛类（动物）为弱锚点兜底，加停用词表过滤无意义主体。<b>搜犀牛只剩犀牛一条（兼容 93），结果可信。</b></td>
+  </tr>
+  <tr>
+    <td class="no">3</td><td>归因表全铺开，用户根本不看</td><td class="kind"><span class="tag t-product">产品设计</span></td>
+    <td>四张归因表平铺、普通与专业用户同等对待 → 改渐进披露：首屏一句话结论＋一正一负提醒，完整归因收进折叠区，风险提示只列需留意项。<b>各取所需，可解释但不强制阅读。</b></td>
+  </tr>
+  <tr>
+    <td class="no">4</td><td>对比表十几行全打星，等于没说</td><td class="kind"><span class="tag t-product">产品设计</span></td>
+    <td>13 维里只有 3 行有区分度，全打★制造"各有优势"错觉 → 加决策摘要（可商用优先→综合分→同分区间价低），平局灰显、授权受限一票否决。<b>从"看表格"变"得结论"。</b></td>
+  </tr>
+  <tr>
+    <td class="no">5</td><td>图片破裂＋评估要点显示成单字</td><td class="kind"><span class="tag t-eng">工程优化</span></td>
+    <td>图片破裂、评估要点显示成单字且全橙，看似样式、实为数据问题，不修则产品显粗糙 → 定位根因：图片路径依赖预览环境，改为内联、去掉目录依赖；要点数据结构错误（一次推入两元素），统一结构并逐一验证。<b>26/26 图片正常、文案告警恢复。</b></td>
+  </tr>
+  <tr>
+    <td class="no">6</td><td>上传草图太费 token</td><td class="kind"><span class="tag t-eng">工程优化</span></td>
+    <td>草图白边多、分辨率高 → 裁白边→缩到 1024→JPEG 0.82 再送模型；评估过换便宜模型但纯前端直连会暴露 key、需后端代理，原型阶段不划算。<b>体积 20KB→4KB（−79%），识别不降。</b></td>
+  </tr>
+  <tr>
+    <td class="no">7</td><td>落地扣子：不能因只有 26 个资产就内嵌</td><td class="kind"><span class="tag t-arch">架构决策</span></td>
+    <td>坚持标准 RAG：资产进知识库、多模态输出 query 检索、代码节点只打分，零内嵌、增减只改知识库。连排三坑：① 输出格式贴 Schema 非样例→模型照抄字段说明，改贴真实样例；② 召回 JSON 被文本化（数值变字符串）打除法报错→加类型归一化；③ 图未绑"视觉理解输入"→补绑定。<b>12 节点全链路跑通。</b></td>
+  </tr>
+</table>
+
+<div class="sec-title">最终链路</div>
+<div class="flow"><div class="row">
+  <div class="s"><b>① 多模态解析</b><span>图/文字→结构化意图</span></div>
+  <div class="s"><b>② 知识库检索</b><span>query 召回候选</span></div>
+  <div class="s"><b>③ 确定性打分</b><span>过滤+评分+排序</span></div>
+  <div class="s"><b>④ 空结果判断</b><span>有果/无果分支</span></div>
+  <div class="s"><b>⑤ 结果组装</b><span>拼 Markdown</span></div>
+  <div class="s"><b>⑥ 回复</b><span>给出结论</span></div>
+</div></div>
+
+<div class="extra">
+  <div class="col">
+    <h4>一体两面（同一设计的两端）</h4>
+    <p><b>前端原型</b>验证产品体验：渐进披露、并排决策、草图压缩 −79%，可上手点、离线也能演示。<br><b>扣子 RAG 工作流</b>验证规模化落地：资产零内嵌、增减只改知识库、12 节点跑通、可发布 Bot/API。两者共享"理解→检索→打分→结论"逻辑；演示先放前端上手、再放工作流证明能落地。真产品化时前端改调工作流 API 即可对接。</p>
+  </div>
+  <div class="col">
+    <h4 class="g">商业化：按决策价值收费</h4>
+    <p><b>① 嵌入式选品助手</b>：给 3D 平台做助手，提升"搜索→购买"转化，按成交分成 / SaaS 年费（最快落地）。<br><b>② 通用决策 API</b>：理解→召回→确定性打分→可解释结论，复制到家具/面料/工业件等非标品采购，按调用量收费。<br><b>③ 评分规则与标签资产</b>：沉淀可迁移的行业 know-how 作壁垒。<br>前提：面数等为估算、26 个仅验证，RAG+零内嵌架构已为接真实大库预留扩展。</p>
+  </div>
+</div>
+
+<div class="boundary"><b>数据边界：</b>售价、分类、体积、格式、热度、年份取自平台公开信息；面数、贴图分辨率、PBR、LOD、均价基准与评分因平台未公开为演示估算，界面以"估算"徽标区分。资产与图片已做离线快照，接口变更也能完整演示。</div>
+
+<div class="foot">
+  <span>Match3D Agent · 作品集 · 智能 3D 资产匹配与评估</span>
+  <span>独立设计并实现</span>
+</div>
+
+</body>
+</html>

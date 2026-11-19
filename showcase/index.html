@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Match3D Agent · 作品简历 / 智能 3D 资产匹配与评估</title>
+<style>
+  :root{
+    --ink:#1c1e2b; --muted:#6b7080; --line:#e8e9f0; --primary:#6c5ce7;
+    --primary-soft:#f0edff; --green:#1f9d6b; --green-soft:#e9f7f0;
+    --amber:#b8860b; --bg:#f7f7fb; --white:#fff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+  header{background:var(--white);border-bottom:1px solid var(--line)}
+  .head-in{max-width:1000px;margin:0 auto;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{display:flex;align-items:center;gap:11px;font-size:16px;font-weight:700}
+  .logo{width:34px;height:34px;border-radius:9px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px}
+  .brand small{display:block;font-size:11px;font-weight:400;color:var(--muted)}
+  .tag{font-size:12px;color:var(--primary);background:var(--primary-soft);padding:6px 12px;border-radius:20px;font-weight:600}
+
+  .hero{padding:64px 0 54px;text-align:center}
+  .hero .eyebrow{font-size:13px;color:var(--primary);font-weight:700;letter-spacing:2px;margin-bottom:16px}
+  .hero h1{font-size:40px;line-height:1.25;margin:0 0 18px;letter-spacing:-1px}
+  .hero h1 span{color:var(--primary)}
+  .hero .lede{font-size:17px;color:var(--muted);max-width:680px;margin:0 auto 28px}
+  .role{display:inline-block;font-size:13px;color:var(--green);background:var(--green-soft);border-radius:20px;padding:6px 16px;margin-bottom:26px;font-weight:600}
+  .metrics{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+  .metric{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px 26px;min-width:130px}
+  .metric b{display:block;font-size:26px;color:var(--primary);font-variant-numeric:tabular-nums}
+  .metric span{font-size:12px;color:var(--muted)}
+
+  section{padding:46px 0;border-top:1px solid var(--line)}
+  .sec-head{margin-bottom:26px}
+  .sec-head .no{font-size:12px;color:var(--primary);font-weight:700;letter-spacing:1px}
+  .sec-head h2{font-size:26px;margin:6px 0 8px}
+  .sec-head p{color:var(--muted);margin:0;max-width:740px}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .card h3{margin:0 0 8px;font-size:16px}
+  .card p{margin:0;color:var(--muted);font-size:14px}
+  .pain h3{color:#b23b3b}
+
+  .caps{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .cap{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:20px;position:relative;padding-left:52px}
+  .cap .ic{position:absolute;left:18px;top:20px;width:24px;height:24px;border-radius:7px;background:var(--primary-soft);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+  .cap h3{font-size:15px;margin:0 0 5px}
+  .cap p{font-size:13px;color:var(--muted);margin:0}
+  .cap.hl{border-color:#cdeadd;background:#fbfefc}
+  .cap.hl .ic{background:var(--green-soft);color:var(--green)}
+
+  .flow{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap}
+  .step{flex:1;min-width:150px;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:18px;text-align:center}
+  .step .n{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:13px;font-weight:700}
+  .step b{font-size:14px;display:block;margin-bottom:4px}
+  .step span{font-size:12px;color:var(--muted)}
+
+  .shot{margin-bottom:34px}
+  .shot-bar{display:flex;align-items:baseline;gap:12px;margin-bottom:12px}
+  .shot-bar .idx{font-size:12px;color:var(--primary);font-weight:700}
+  .shot-bar h3{font-size:17px;margin:0}
+  .shot-bar p{font-size:13px;color:var(--muted);margin:0 0 0 auto;text-align:right;max-width:46%}
+  .shot-img{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:10px;overflow:hidden}
+  .shot-img img{display:block;width:100%;border-radius:8px}
+  .new{font-size:11px;color:var(--green);background:var(--green-soft);padding:2px 8px;border-radius:10px;font-weight:600;vertical-align:middle;margin-left:6px}
+
+  .stack{display:flex;flex-wrap:wrap;gap:9px}
+  .stack span{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:13px;color:#4a4f60}
+  .note{background:#fff9ec;border:1px solid #f0e0b8;border-radius:12px;padding:18px 20px;font-size:13px;color:#7a6428}
+  .note b{color:#5c4810}
+  .decision{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--green);border-radius:10px;padding:16px 20px;margin-top:16px;font-size:13.5px;color:#4a4f60}
+  .decision b{color:var(--green)}
+
+  footer{padding:34px 0 50px;text-align:center;color:var(--muted);font-size:12px;border-top:1px solid var(--line);background:var(--white)}
+
+  @media(max-width:720px){
+    .hero h1{font-size:30px}.hero .lede{font-size:15px}
+    .grid2,.caps{grid-template-columns:1fr}
+    .shot-bar{flex-wrap:wrap}.shot-bar p{margin:6px 0 0;text-align:left;max-width:100%}
+    .metric{min-width:110px;padding:12px 18px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <div class="brand"><span class="logo">◈</span><div>Match3D Agent<small>智能 3D 资产匹配与评估</small></div></div>
+    <span class="tag">作品简历 · 可运行 Demo</span>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">PORTFOLIO · PRODUCT CASE STUDY</div>
+    <h1>让买家<span>上传一张图</span>，<br>就找到平台里最合适的 3D 资产</h1>
+    <p class="lede">一个面向 3D 资产交易场景的智能匹配 Agent：理解文字、商品图甚至手绘草图，自动检索资产库，并从兼容性、画质、价格三个维度给出可解释的评估与"买哪个"的决策结论。</p>
+    <div class="role">独立设计并实现 · 从产品定义到可运行原型</div>
+    <div class="metrics">
+      <div class="metric"><b>26</b><span>真实平台资产</span></div>
+      <div class="metric"><b>4</b><span>评估维度</span></div>
+      <div class="metric"><b>13</b><span>并排对比维度</span></div>
+      <div class="metric"><b>−79%</b><span>草图体积优化</span></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="sec-head"><div class="no">01 · 问题与思路</div><h2>买家不缺选择，缺的是"帮我选出来"</h2>
+      <p>3D 资产平台的买家往往只有一张参考图或一个模糊想法，却要在大量模型里逐个比对风格、面数、授权和价格。这个项目的目标，是把"找与比"的过程，收敛成一句话结论。</p></div>
+    <div class="grid2">
+      <div class="card pain"><h3>真实痛点</h3><p>描述说不清、图搜不到、参数看不懂、价格比不动——买家难以判断"这个资产能不能用、值不值"。而平台自有资产数据，也没有被变成可检索的智能体验。</p></div>
+      <div class="card"><h3>产品思路</h3><p>多模态理解需求 → 相关性过滤检索 → 规则化可解释评分 → 渐进披露评估 → 并排对比给出决策摘要，全程把结论摆在最前面、把证据放在需要时展开。</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><div class="no">02 · 核心能力</div><h2>从"给结果"到"给结论"</h2>
+      <p>六项能力中有三项是刻意的产品取舍：渐进披露、决策摘要、图片预压缩——它们不增加功能数量，而是决定用户是否真的用得起来。</p></div>
+    <div class="caps">
+      <div class="cap"><span class="ic">1</span><h3>多模态需求理解</h3><p>文字与图片双输入；视觉模型识别品类、主体、材质、主色，与文字描述融合，展示可核对的理解标签与置信度，失败时降级本地解析。</p></div>
+      <div class="cap"><span class="ic">2</span><h3>相关性过滤检索</h3><p>按具体名词、品类与风格建立优先级，完全不相干的资产不进入结果，避免"搜耳机出音箱"这类破坏信任的匹配。</p></div>
+      <div class="cap"><span class="ic">3</span><h3>可解释评分</h3><p>兼容性 = 品类42% + 风格26% + 色彩20% + 关键词12%；综合分 = 兼容性46% + 分辨率30% + 价格24%，逐项可展开核对。</p></div>
+      <div class="cap hl"><span class="ic">4</span><h3>渐进披露评估 <span class="new">产品设计</span></h3><p>首屏只给一句话结论与一正一负两条提醒；完整归因收进折叠区。普通买家看结论，专业买家可深挖，不把可解释性变成强制阅读。</p></div>
+      <div class="cap hl"><span class="ic">5</span><h3>并排对比与决策摘要 <span class="new">产品设计</span></h3><p>最多 3 个资产同屏对比，自动推荐最优项并说明理由；平局维度灰显、授权受限一票否决，直接回答"买哪个"而非让用户自己算。</p></div>
+      <div class="cap hl"><span class="ic">6</span><h3>图片预压缩与成本意识 <span class="new">工程优化</span></h3><p>上传草图自动裁白边、缩放到 1024px、JPEG 压缩，体积降约 79% 而识别效果不变；单张草图约 1.5k token，一次匹配成本不足一分钱。</p></div>
+      <div class="cap"><span class="ic">7</span><h3>真实数据 + 诚实边界</h3><p>价格、分类、体积、格式、热度取自平台公开接口；面数、贴图、PBR 等未公开项明确标注为演示估算，不冒充真实数据。</p></div>
+      <div class="cap"><span class="ic">8</span><h3>响应式与离线自足</h3><p>窄至 440px 的面板适配；图片 Base64 内联、资产数据离线快照，接口变更或下线也能完整演示。</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><div class="no">03 · 使用流程</div><h2>三步，从需求到决策</h2></div>
+    <div class="flow">
+      <div class="step"><div class="n">1</div><b>描述需求</b><span>上传图片 / 草图，或输入文字</span></div>
+      <div class="step"><div class="n">2</div><b>智能理解</b><span>预压缩后多模态识别品类、风格、色彩</span></div>
+      <div class="step"><div class="n">3</div><b>匹配与评估</b><span>检索、评分、对比、给出结论</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><div class="no">04 · 界面展示</div><h2>关键界面实测截图</h2><p>以下截图均来自当前可运行原型，非设计稿。</p></div>
+
+    <div class="shot">
+      <div class="shot-bar"><span class="idx">01</span><h3>需求输入</h3><p>支持图片上传、快捷描述与使用场景选择，场景会影响分辨率评估标准。</p></div>
+      <div class="shot-img"><img src="shots/1-home.png" alt="需求输入界面"></div>
+    </div>
+
+    <div class="shot">
+      <div class="shot-bar"><span class="idx">02</span><h3>匹配结果</h3><p>展示需求理解标签与置信度，结果卡片含综合评分、价格、三维度条与相关性标记。</p></div>
+      <div class="shot-img"><img src="shots/2-results.png" alt="匹配结果界面"></div>
+    </div>
+
+    <div class="shot">
+      <div class="shot-bar"><span class="idx">03</span><h3>草图上传与图片优化</h3><p>上传带白边草图后，卡片显示"图片优化 20KB→4KB · −79% · 已裁白边"，真实视觉模型仍准确识别主体。</p></div>
+      <div class="shot-img"><img src="shots/5-sketch-compress.png" alt="草图上传与图片优化"></div>
+    </div>
+
+    <div class="shot">
+      <div class="shot-bar"><span class="idx">04</span><h3>评估详情 · 渐进披露</h3><p>首屏一句话结论 + 关键提醒，完整归因收进"这个分怎么算的"折叠区，风险提示只列需留意项。</p></div>
+      <div class="shot-img"><img src="shots/3-drawer.png" alt="评估详情抽屉"></div>
+    </div>
+
+    <div class="shot">
+      <div class="shot-bar"><span class="idx">05</span><h3>评分归因 · 按需展开</h3><p>展开后四张分项 × 权重归因表逐项可核对，透明度保留但不强制阅读。</p></div>
+      <div class="shot-img"><img src="shots/3b-drawer-attrib.png" alt="评分归因展开"></div>
+    </div>
+
+    <div class="shot">
+      <div class="shot-bar"><span class="idx">06</span><h3>并排对比与决策摘要</h3><p>自动推荐最优项，平局维度灰显，授权受限标红，把"看表格"变成"得结论"。</p></div>
+      <div class="shot-img"><img src="shots/4-compare.png" alt="并排对比弹窗"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><div class="no">05 · 实现与技术栈</div><h2>轻量实现，重点在产品设计</h2>
+      <p>前端原型用原生 HTML / CSS / JavaScript 实现，无构建依赖，可直接离线运行；视觉理解接入多模态大模型，失败时自动降级到本地图像主色与文本解析。关键取舍是把工程成本与用户体验一起算：草图预压缩降低 token，同时不牺牲识别效果。</p></div>
+    <div class="stack">
+      <span>HTML / CSS / 原生 JS</span><span>多模态视觉模型</span><span>Canvas 图像预处理</span>
+      <span>裁白边 / 缩放 / JPEG 压缩</span><span>图像主色量化</span><span>文本意图解析</span>
+      <span>加权评分引擎</span><span>相关性过滤</span><span>Base64 内联图片</span>
+      <span>响应式 / 窄屏适配</span>
+    </div>
+    <div class="decision"><b>技术判断：</b>曾评估接入 DeepSeek-Flash 以进一步降本，但纯静态前端直接调用会暴露 API key、必须引入后端代理，对原型阶段得不偿失，因此保留无密钥 SDK。成本测算与实际优化都以"是否真正改善体验"为前提，而非单纯堆技术。</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><div class="no">06 · 数据说明</div><h2>对数据来源保持诚实</h2></div>
+    <div class="note"><b>真实数据：</b>售价、官方分类、文件体积、平台格式、浏览与下载量、发布年份、资产编号与作者编号，取自平台公开可见的信息。<br><b>演示估算：</b>多边形面数、贴图分辨率、PBR、LOD、市场均价基准与评分，因平台未公开，均为演示用途的估算值，界面中以"估算"徽标明确区分。<br>原型所用资产数据与图片已做离线快照，即使接口变更或下线，也可完整演示。</div>
+  </section>
+</div>
+
+<footer>Match3D Agent · 作品简历 · 智能 3D 资产匹配与评估 · 可运行原型演示</footer>
+
+</body>
+</html>
