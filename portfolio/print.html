@@ -4,43 +4,39 @@
 <meta charset="UTF-8">
 <title>Match3D Agent · 作品集（纸质版）</title>
 <style>
-  @page{size:A4;margin:14mm 15mm}
+  @page{size:A4;margin:10mm 13mm}
   *{box-sizing:border-box}
   body{margin:0;color:#1b1d2a;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
-    font-size:10px;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .top{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #5b4bd6;padding-bottom:9px;margin-bottom:11px}
-  .top h1{font-size:19px;margin:0 0 2px;letter-spacing:-.3px}
-  .top .sub{font-size:10px;color:#666}
-  .top .role{font-size:9px;color:#12805c;background:#e7f6ef;padding:4px 9px;border-radius:10px;font-weight:700;white-space:nowrap}
-  .lede{font-size:10.5px;color:#444;margin:0 0 11px}
-  .metrics{display:flex;gap:8px;margin-bottom:12px}
-  .metric{flex:1;border:1px solid #e2e3ec;border-radius:7px;padding:7px 4px;text-align:center}
-  .metric b{display:block;font-size:16px;color:#5b4bd6}
-  .metric span{font-size:8.5px;color:#666}
-  .sec-title{font-size:12px;font-weight:700;margin:13px 0 7px;padding-left:8px;border-left:3px solid #5b4bd6}
-  table{width:100%;border-collapse:collapse;font-size:9px}
-  th,td{border:1px solid #dcdde7;padding:5px 7px;vertical-align:top;text-align:left}
-  th{background:#f2f0fd;color:#3b2fa8;font-weight:700;font-size:9px}
-  td.no{width:20px;text-align:center;font-weight:700;color:#5b4bd6;background:#faf9ff}
-  td.kind{width:52px}
-  .tag{font-size:7.5px;padding:1px 5px;border-radius:7px;font-weight:700;white-space:nowrap}
+    font-size:10.5px;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .top{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #5b4bd6;padding-bottom:13px;margin-bottom:17px}
+  .top h1{font-size:21px;margin:0 0 4px;letter-spacing:-.3px}
+  .top .sub{font-size:10.5px;color:#666}
+  .top .role{font-size:10.5px;color:#12805c;background:#e7f6ef;padding:5px 12px;border-radius:11px;font-weight:700;white-space:nowrap}
+  .lede{font-size:10.5px;color:#444;margin:0 0 12px;line-height:1.75}
+  .sec-title{font-size:12.5px;font-weight:700;margin:12px 0 7px;padding-left:9px;border-left:3px solid #5b4bd6}
+  table{width:100%;border-collapse:collapse;font-size:9.5px}
+  th,td{border:1px solid #dcdde7;padding:6px 7px;vertical-align:top;text-align:left;line-height:1.48}
+  th{background:#f2f0fd;color:#3b2fa8;font-weight:700;font-size:9.5px}
+  td.no{width:24px;text-align:center;font-weight:700;color:#5b4bd6;background:#faf9ff}
+  td.kind{width:62px}
+  .tag{font-size:8.5px;padding:2px 5px;border-radius:7px;font-weight:700;white-space:nowrap}
   .t-product{background:#e7f6ef;color:#12805c}
   .t-eng{background:#fdf5e3;color:#a8740a}
   .t-arch{background:#f0edff;color:#5b4bd6}
   b{color:#1b1d2a}
   .flow{margin-top:6px}
   .flow .row{display:flex;gap:5px}
-  .flow .s{flex:1;border:1px solid #dcdde7;border-radius:6px;padding:5px 3px;text-align:center;font-size:8px}
-  .flow .s b{display:block;font-size:8.5px;margin-bottom:1px}
-  .flow .s span{color:#777;font-size:7.5px}
-  .foot{margin-top:12px;border-top:1px solid #e2e3ec;padding-top:7px;display:flex;justify-content:space-between;font-size:8px;color:#888}
-  .boundary{margin-top:10px;background:#fdf9ef;border:1px solid #f0e2bc;border-radius:7px;padding:8px 10px;font-size:8.5px;color:#7a6428}
+  .flow .s{flex:1;border:1px solid #dcdde7;border-radius:6px;padding:6px 3px;text-align:center;font-size:9px}
+  .flow .s b{display:block;font-size:9.5px;margin-bottom:1px}
+  .flow .s span{color:#777;font-size:8px}
+  .foot{margin-top:10px;border-top:1px solid #e2e3ec;padding-top:10px;display:flex;justify-content:space-between;font-size:10px;color:#888}
+  .boundary{margin-top:10px;background:#fdf9ef;border:1px solid #f0e2bc;border-radius:8px;padding:12px 15px;font-size:10.5px;color:#7a6428;line-height:1.6}
   .boundary b{color:#5c4810}
-  .extra{display:flex;gap:9px;margin-top:11px}
-  .extra .col{flex:1;border:1px solid #e2e3ec;border-radius:7px;padding:8px 10px}
-  .extra h4{margin:0 0 5px;font-size:10px;color:#5b4bd6}
+  .extra{display:flex;gap:11px;margin-top:10px}
+  .extra .col{flex:1;border:1px solid #e2e3ec;border-radius:7px;padding:8px 11px}
+  .extra h4{margin:0 0 6px;font-size:11.5px;color:#5b4bd6}
   .extra h4.g{color:#12805c}
-  .extra p{margin:0;font-size:8.3px;color:#555;line-height:1.55}
+  .extra p{margin:0;font-size:9.5px;color:#555;line-height:1.6}
   .extra b{color:#1b1d2a}
 </style>
 </head>
@@ -54,53 +50,34 @@
   <span class="role">产品案例 / Portfolio</span>
 </div>
 
-<p class="lede"><b>我的角色 · AI 产品经理：</b>我不写代码，但做三件事——定义对的问题、做对的取舍、推动真正落地；我清楚技术的边界与代价，所以方案能落地、预期靠谱。<b>定位：</b>这个工具不是"帮人找东西"，而是<b>帮人在不确定中快速做决策</b>——采购中反复出现的三个问题：风格对不对、能不能用、值不值这个价，买家只上传一张图或一句想法，Agent 就从兼容性、画质、价格给出可解释评估与"买哪个"的结论。</p>
-
-<div class="metrics">
-  <div class="metric"><b>26</b><span>真实平台资产</span></div>
-  <div class="metric"><b>−79%</b><span>草图体积优化</span></div>
-  <div class="metric"><b>7</b><span>关键问题解决</span></div>
-  <div class="metric"><b>12</b><span>工作流节点跑通</span></div>
-</div>
+<p class="lede"><b>我的角色 · AI 产品经理：</b>从问题定义、方案取舍到落地验证由我一人主导；我把技术边界与成本算进产品决策，方案可落地、预期可控。<br>
+<b>做这件事的原因：</b>买家手里往往只有一张参考图、一张草图，或一句模糊的想法。<br>
+但要回答的问题很具体：风格对不对？能不能用？值不值这个价？<br>
+Match3D Agent 把这三个问题，一次变成有依据的结论——从兼容性、画质、价格三个维度给出可解释评估与"买哪个"的结论。</p>
 
 <div class="sec-title">目标与思路</div>
 <table>
   <tr><td style="width:88px"><b>三个决策问题</b></td><td>① 风格对不对：参考图与候选是否匹配；② 能不能用：授权可否商用、画质够不够；③ 值不值：同类价差大缺基准。买家只有一张图或模糊想法，三个问题每次采购都要重答一遍。</td></tr>
-  <tr><td><b>产品思路</b></td><td>多模态理解 → 相关性过滤 → 可解释评分 → 渐进披露 → 并排对比给结论；结论摆最前、证据按需展开；资产走知识库、不写死代码。核心标准：每句话是否帮用户更快做决定，而非功能更炫。真正卡住用户的不是"找不到"，而是"找到了不敢拍板"。</td></tr>
+  <tr><td><b>产品思路</b></td><td>多模态理解 → 相关性过滤 → 可解释评分 → 渐进披露 → 并排对比给结论；结论摆最前、证据按需展开；资产走知识库、不写死代码。核心标准：每个结论是否帮用户更快做决定，而非功能更炫。用户真正的难点不是"找不到"，而是"找到了也难以下决定"。</td></tr>
 </table>
 
-<div class="sec-title">迭代优化记录（七个关键判断）</div>
+<div class="sec-title">迭代优化记录（三个关键判断）</div>
 <table>
-  <tr><th style="width:20px">#</th><th style="width:130px">问题</th><th style="width:60px">性质</th><th>怎么解决 → 结果</th></tr>
+  <tr><th style="width:20px">#</th><th style="width:118px">问题</th><th style="width:52px">性质</th><th>怎么解决 → 结果</th></tr>
   <tr>
-    <td class="no">1</td><td>演示资产是编的，没有说服力</td><td class="kind"><span class="tag t-arch">架构决策</span></td>
-    <td>站点是关闭 SSR 的 SPA，普通抓取拿不到数据 → 用无头浏览器渲染 DOM 再解析，拿到 26 个真实资产；关键词逐个搜内部接口、按图片尾号精确匹配 ID，26/26 命中，回填真实分类/体积/格式/热度。<b>资产从"编的"变"真的"；未公开的面数等明确标估算。</b></td>
+    <td class="no">1</td><td>草图解析不准，用描述里的名词纠正</td><td class="kind"><span class="tag t-product">产品设计</span></td>
+    <td>草图潦草、主体常被认错，但用户手写的名词是明确意图 → 定规则：<b>文字与图片冲突时，文字具体名词强制覆盖图片解析名词</b>；再叠加两级锚点过滤（具体名词强锚点精确匹配＋泛类兜底＋停用词表）。<b>搜犀牛仅返回犀牛，不再混入发动机、狗屋；识别成库里没有的品类也能靠文字纠正或友好返回空结果。一次错误推荐就会损害信任，相关性是底线。</b></td>
   </tr>
   <tr>
-    <td class="no">2</td><td>搜犀牛却混进发动机、狗屋、鸟</td><td class="kind"><span class="tag t-product">产品设计</span></td>
-    <td>全量打分后不过滤，低分资产仍在 → 设计两级锚点：具体名词（犀牛/机甲）为强锚点只精确匹配，泛类（动物）为弱锚点兜底，加停用词表过滤无意义主体。<b>搜犀牛只剩犀牛一条（兼容 93），结果可信。</b></td>
+    <td class="no">2</td><td>降本：不牺牲效果，控制 token 成本</td><td class="kind"><span class="tag t-eng">工程优化</span></td>
+    <td>识别品类/风格/颜色/主体是轻量任务，用不上旗舰大模型 → 两头降本：<b>图片侧</b>裁白边→缩到512–1024→JPEG压缩，体积20KB→4KB；<b>模型侧建议</b>用轻量视觉模型——首选<b>千问 Qwen3.7-Flash</b>（支持图像理解＋JSON输出，输入约¥0.2/百万token），或<b>智谱 GLM-4V</b>（国产、中文强、同为厘级）。避开旗舰推理模型（贵10–50倍＋思维链污染结构化）和纯文本模型（如DeepSeek，不支持视觉）。<b>−79%且识别不降；单次约万分之二元、1元跑数千次。</b></td>
   </tr>
   <tr>
-    <td class="no">3</td><td>归因表全铺开，用户根本不看</td><td class="kind"><span class="tag t-product">产品设计</span></td>
-    <td>四张归因表平铺、普通与专业用户同等对待 → 改渐进披露：首屏一句话结论＋一正一负提醒，完整归因收进折叠区，风险提示只列需留意项。<b>各取所需，可解释但不强制阅读。</b></td>
-  </tr>
-  <tr>
-    <td class="no">4</td><td>对比表十几行全打星，等于没说</td><td class="kind"><span class="tag t-product">产品设计</span></td>
-    <td>13 维里只有 3 行有区分度，全打★制造"各有优势"错觉 → 加决策摘要（可商用优先→综合分→同分区间价低），平局灰显、授权受限一票否决。<b>从"看表格"变"得结论"。</b></td>
-  </tr>
-  <tr>
-    <td class="no">5</td><td>图片破裂＋评估要点显示成单字</td><td class="kind"><span class="tag t-eng">工程优化</span></td>
-    <td>图片破裂、评估要点显示成单字且全橙，看似样式、实为数据问题，不修则产品显粗糙 → 定位根因：图片路径依赖预览环境，改为内联、去掉目录依赖；要点数据结构错误（一次推入两元素），统一结构并逐一验证。<b>26/26 图片正常、文案告警恢复。</b></td>
-  </tr>
-  <tr>
-    <td class="no">6</td><td>上传草图太费 token</td><td class="kind"><span class="tag t-eng">工程优化</span></td>
-    <td>草图白边多、分辨率高 → 裁白边→缩到 1024→JPEG 0.82 再送模型；评估过换便宜模型但纯前端直连会暴露 key、需后端代理，原型阶段不划算。<b>体积 20KB→4KB（−79%），识别不降。</b></td>
-  </tr>
-  <tr>
-    <td class="no">7</td><td>落地扣子：不能因只有 26 个资产就内嵌</td><td class="kind"><span class="tag t-arch">架构决策</span></td>
-    <td>坚持标准 RAG：资产进知识库、多模态输出 query 检索、代码节点只打分，零内嵌、增减只改知识库。连排三坑：① 输出格式贴 Schema 非样例→模型照抄字段说明，改贴真实样例；② 召回 JSON 被文本化（数值变字符串）打除法报错→加类型归一化；③ 图未绑"视觉理解输入"→补绑定。<b>12 节点全链路跑通。</b></td>
+    <td class="no">3</td><td>海量资产，该不该做成数据库？</td><td class="kind"><span class="tag t-arch">架构决策</span></td>
+    <td>26个用知识库可验证，但海量资产文档库撑不住、也不擅长结构化过滤 → 判断是分层不是二选一：<b>①</b> 结构化字段（品类/价格/授权/面数）进 PostgreSQL 做精确过滤分面；<b>②</b> 名称+标签+描述做 embedding 进向量索引（pgvector/Milvus/ES）做语义召回；<b>③</b> 先硬过滤缩小候选，再向量召回＋关键词BM25两路并行、融合重排后接确定性打分；<b>④</b> 主库存源数据，向量索引可重建。<b>几十万级用 PG+pgvector 一套够，百万级再上专用向量库；现在的 RAG+零内嵌就是最小验证版，换库不动打分逻辑。</b></td>
   </tr>
 </table>
+<div style="margin-top:8px;font-size:9px;color:#999">早期迭代已收起：资产数据真实化（无头浏览器抓取，26/26 命中）· 对比决策摘要（平局灰显、授权一票否决）· 体验细节稳定性（26/26 图片正常）。</div>
 
 <div class="sec-title">最终链路</div>
 <div class="flow"><div class="row">
@@ -115,7 +92,7 @@
 <div class="extra">
   <div class="col">
     <h4>一体两面（同一设计的两端）</h4>
-    <p><b>前端原型</b>验证产品体验：渐进披露、并排决策、草图压缩 −79%，可上手点、离线也能演示。<br><b>扣子 RAG 工作流</b>验证规模化落地：资产零内嵌、增减只改知识库、12 节点跑通、可发布 Bot/API。两者共享"理解→检索→打分→结论"逻辑；演示先放前端上手、再放工作流证明能落地。真产品化时前端改调工作流 API 即可对接。</p>
+    <p><b>前端原型</b>验证产品体验：草图解析＋文字名词纠正、渐进披露、并排决策、草图压缩 −79%，可上手点、离线也能演示。<br><b>扣子 RAG 工作流</b>验证规模化落地：资产零内嵌、增减只改知识库、12 节点跑通、可发布 Bot/API。两者共享"理解→检索→打分→结论"逻辑；演示先放前端上手、再放工作流证明能落地。真产品化时前端改调工作流 API 即可对接。</p>
   </div>
   <div class="col">
     <h4 class="g">商业化：按决策价值收费</h4>
@@ -127,7 +104,7 @@
 
 <div class="foot">
   <span>Match3D Agent · 作品集 · 智能 3D 资产匹配与评估</span>
-  <span>独立设计并实现</span>
+  <span>独立定义并推动落地</span>
 </div>
 
 </body>
